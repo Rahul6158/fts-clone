@@ -6,25 +6,6 @@ import datetime
 import pandas as pd
 import streamlit as st
 
-# Sans-Serif Fonts
-st.write("Arial", font="Arial")
-st.write("Helvetica", font="Helvetica")
-st.write("Calibri", font="Calibri")
-st.write("Verdana", font="Verdana")
-st.write("Tahoma", font="Tahoma")
-
-# Serif Fonts
-st.write("Times New Roman", font="Times New Roman")
-st.write("Georgia", font="Georgia")
-st.write("Palatino", font="Palatino")
-st.write("Courier New", font="Courier New")
-
-# Monospace Fonts
-st.write("Courier New", font="Courier New")
-st.write("Lucida Console", font="Lucida Console")
-st.write("Monaco", font="Monaco")
-
-
 # Read the CSV file containing the quotes and authors
 quotes_df = pd.read_csv('AnimeQuotes.csv')  # Replace 'AnimeQuotes.csv' with your file path
 
@@ -39,8 +20,9 @@ def get_daily_quote():
 def display_quote():
     st.header("Daily Quote:")
     quote, author = get_daily_quote()
-    quote_html = f'<p style="color:darkred", "font = arial"><strong>{quote}</strong></p>'
-    author_html = f'<p style="color:peach"><em>- {author}</em></p>'
+quote_html = f'<p style="color:red; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
+    author_html = f'<p style="color:blue; font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
+
     full_html = quote_html + author_html
     st.components.v1.html(full_html, height=150)  # Display the combined quote and author with HTML styling
 
