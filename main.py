@@ -20,7 +20,7 @@ def display_quote():
     st.sidebar.title("Timepass Quote:")
     quote, author = get_hourly_quote()
     
-    quote_html = f'<p style="color:mint; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
+    quote_html = f'<p style="color:peach; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
     author_html = f'<p style="color:blue; font-family: Lucida Console; font-size: 16px;"><em>- {author}</em></p>'
     full_html = quote_html + author_html
     
