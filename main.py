@@ -20,7 +20,7 @@ def get_daily_quote():
 def display_quote():
     st.header("Daily Quote:")
     quote, author = get_daily_quote()
-quote_html = f'<p style="color:red; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
+    quote_html = f'<p style="color:red; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
     author_html = f'<p style="color:blue; font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
 
     full_html = quote_html + author_html
