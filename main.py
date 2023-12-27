@@ -19,8 +19,9 @@ def get_daily_quote():
 def display_quote():
     st.header("Daily Quote:")
     quote, author = get_daily_quote()
-    st.write(f"\"{quote}\"")
-    st.write(f"- {author}")
+st.markdown(f'<p style="color:#FF5733">{quote}</p>', unsafe_allow_html=True)  # Change color for the quote
+st.markdown(f'<p style="color:#33FFA8">- {author}</p>', unsafe_allow_html=True)  # Change color for the author
+
 
 def custom_sidebar():
     st.sidebar.title("Features")
