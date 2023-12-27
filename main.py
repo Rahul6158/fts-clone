@@ -29,7 +29,7 @@ def custom_sidebar():
     st.sidebar.title("Under The Guidance of :")
     st.sidebar.write("Dr. Bomma Ramakrishna")
 
-     st.header("Daily Quote:")
+    st.header("Daily Quote:")
     quote, author = get_daily_quote()
       # Define CSS for gradient background
     quote_html = f'''
