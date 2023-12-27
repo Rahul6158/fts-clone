@@ -24,7 +24,7 @@ def display_quote():
     author_html = f'<p style="color:blue; font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
     full_html = quote_html + author_html
     
-    st.components.v1.html(full_html, height=150)  # Display the combined quote and author with HTML styling
+    st.sidebar.markdown(full_html, unsafe_allow_html=True)  # Display the combined quote and author in the sidebar
 
 def custom_sidebar():
     st.sidebar.title("Features")
@@ -38,12 +38,16 @@ def custom_sidebar():
         st.sidebar.write(name)
     st.sidebar.title("Under The Guidance of :")
     st.sidebar.write("Dr. Bomma Ramakrishna")
-    return page_choice
+    
     # Display the daily quote and author
     display_quote()
+    
+    return page_choice
+
+# Use the custom sidebar method
 page_choice = custom_sidebar()
 
-
+# Depending on the selected choice, call the respective main function
 if page_choice == "Document and Pdf Translation":
     page1.main()  # Call the main function for Page 1
 elif page_choice == "Text Translation":
