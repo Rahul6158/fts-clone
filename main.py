@@ -17,7 +17,7 @@ def get_hourly_quote():
 
 # Function to display the hourly quote and author
 def display_quote():
-    st.sidebar.title("Daily Quote:")
+    st.sidebar.title("Timepass Quote:")
     quote, author = get_hourly_quote()
     
     quote_html = f'<p style="color:red; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
