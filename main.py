@@ -4,6 +4,26 @@ import page2
 import page3
 import datetime
 import pandas as pd
+import streamlit as st
+
+# Sans-Serif Fonts
+st.write("Arial", font="Arial")
+st.write("Helvetica", font="Helvetica")
+st.write("Calibri", font="Calibri")
+st.write("Verdana", font="Verdana")
+st.write("Tahoma", font="Tahoma")
+
+# Serif Fonts
+st.write("Times New Roman", font="Times New Roman")
+st.write("Georgia", font="Georgia")
+st.write("Palatino", font="Palatino")
+st.write("Courier New", font="Courier New")
+
+# Monospace Fonts
+st.write("Courier New", font="Courier New")
+st.write("Lucida Console", font="Lucida Console")
+st.write("Monaco", font="Monaco")
+
 
 # Read the CSV file containing the quotes and authors
 quotes_df = pd.read_csv('AnimeQuotes.csv')  # Replace 'AnimeQuotes.csv' with your file path
