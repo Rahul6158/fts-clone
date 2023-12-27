@@ -40,6 +40,7 @@ def custom_sidebar():
     st.sidebar.write("Dr. Bomma Ramakrishna")
     
     # Display the daily quote and author
+    st.header("Daily Quote:")
     display_quote()
     
     return page_choice
