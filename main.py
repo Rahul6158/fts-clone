@@ -4,9 +4,14 @@ import page2
 import page3
 import datetime
 import pandas as pd
+from itertools import cycle
 
 # Read the CSV file containing the quotes and authors
 quotes_df = pd.read_csv('AnimeQuotes.csv')  # Replace 'AnimeQuotes.csv' with your file path
+
+# Colors to rotate for quotes and authors
+quote_colors = cycle(["red", "blue", "green", "purple"])  # Add more colors as needed
+author_colors = cycle(["blue", "green", "purple", "red"])  # Corresponding colors for authors
 
 # Function to get the quote and author based on the current hour
 def get_hourly_quote():
@@ -15,13 +20,17 @@ def get_hourly_quote():
     hourly_quote = quotes_df.iloc[quote_index]
     return hourly_quote['Quote'], hourly_quote['Character']  # Assuming 'Quote' and 'Character' are column names
 
-# Function to display the hourly quote and author
+# Function to display the hourly quote and author with rotating colors
 def display_quote():
-    st.sidebar.title("Timepass Quote:")
+    st.sidebar.title("Daily Quote:")
     quote, author = get_hourly_quote()
     
-    quote_html = f'<p style="color:peach; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
-    author_html = f'<p style="color:blue; font-family: Lucida Console; font-size: 16px;"><em>- {author}</em></p>'
+    # Get next color in rotation for the quote and author
+    quote_color = next(quote_colors)
+    author_color = next(author_colors)
+    
+    quote_html = f'<p style="color:{quote_color}; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
+    author_html = f'<p style="color:{author_color}; font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
     full_html = quote_html + author_html
     
     st.sidebar.markdown(full_html, unsafe_allow_html=True)  # Display the combined quote and author in the sidebar
@@ -31,6 +40,14 @@ def custom_sidebar():
     st.sidebar.header("Available Options")  # Add a sidebar title
     # Create radio button group
     page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])
+
+    names = ["Sai Annapurna", "Kalyan Ram Chegondi", "Vinay Bhaskar Bonam", "Karthik Vasa", "Tusha Rahul Bellamkonda", "Pindi Sushmitha Devi"]
+    st.sidebar.title("Developed By :")
+    for name in names:
+        st.sidebar.write(name)
+    st.sidebar.title("Under The Guidance of :")
+    st.sidebar.write("Dr. Bomma Ramakrishna")
+    
     # Display the hourly quote and author
     display_quote()
     
