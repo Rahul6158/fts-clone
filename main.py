@@ -31,14 +31,6 @@ def custom_sidebar():
     st.sidebar.header("Available Options")  # Add a sidebar title
     # Create radio button group
     page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])
-
-    names = ["Sai Annapurna", "Kalyan Ram Chegondi", "Vinay Bhaskar Bonam", "Karthik Vasa", "Tusha Rahul Bellamkonda", "Pindi Sushmitha Devi"]
-    st.sidebar.title("Developed By :")
-    for name in names:
-        st.sidebar.write(name)
-    st.sidebar.title("Under The Guidance of :")
-    st.sidebar.write("Dr. Bomma Ramakrishna")
-    
     # Display the hourly quote and author
     display_quote()
     
