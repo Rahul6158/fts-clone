@@ -6,14 +6,14 @@ import datetime
 import pandas as pd
 
 # Read the CSV file containing the quotes and authors
-quotes_df = pd.read_csv('AnimeQuotes.csv')  # Replace 'path_to_your_csv_file.csv' with your file path
+quotes_df = pd.read_csv('AnimeQuotes.csv')  # Replace 'AnimeQuotes.csv' with your file path
 
 # Function to get the quote and author for the day based on the date
 def get_daily_quote():
     today = datetime.datetime.now()
     quote_index = today.day % len(quotes_df)
     daily_quote = quotes_df.iloc[quote_index]
-    return daily_quote['Quote'], daily_quote['Character']  # Assuming 'Quote' and 'Author' are column names
+    return daily_quote['Quote'], daily_quote['Character']  # Assuming 'Quote' and 'Character' are column names
 
 # Function to display the daily quote and author
 def display_quote():
@@ -21,6 +21,8 @@ def display_quote():
     quote, author = get_daily_quote()
     quote_html = f'<p style="color:red"><strong>{quote}</strong></p>'
     author_html = f'<p style="color:blue"><em>- {author}</em></p>'
+    full_html = quote_html + author_html
+    st.components.v1.html(full_html, height=150)  # Display the combined quote and author with HTML styling
 
 def custom_sidebar():
     st.sidebar.title("Features")
@@ -35,6 +37,7 @@ def custom_sidebar():
     st.sidebar.title("Under The Guidance of :")
     st.sidebar.write("Dr. Bomma Ramakrishna")
     return page_choice
+
 # Use the custom sidebar method
 page_choice = custom_sidebar()
 
