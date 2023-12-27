@@ -55,12 +55,12 @@ def custom_sidebar():
 # Use the custom sidebar method
 page_choice = custom_sidebar()
 
-# Display the daily quote and author
-display_quote()
-
 if page_choice == "Document and Pdf Translation":
     page1.main()  # Call the main function for Page 1
 elif page_choice == "Text Translation":
     page2.main()
 elif page_choice == "Text Summarization":
     page3.main()  # Call the main function for Page 3
+
+# Display the daily quote and author
+display_quote()
