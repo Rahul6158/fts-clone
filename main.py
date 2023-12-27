@@ -39,12 +39,10 @@ def custom_sidebar():
     st.sidebar.title("Under The Guidance of :")
     st.sidebar.write("Dr. Bomma Ramakrishna")
     return page_choice
-
-# Use the custom sidebar method
+    # Display the daily quote and author
+    display_quote()
 page_choice = custom_sidebar()
 
-# Display the daily quote and author
-display_quote()
 
 if page_choice == "Document and Pdf Translation":
     page1.main()  # Call the main function for Page 1
