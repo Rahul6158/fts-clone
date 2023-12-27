@@ -18,7 +18,21 @@ def get_daily_quote():
 
 # Function to display the daily quote and author
 def display_quote():
-    st.header("Daily Quote:")
+   
+def custom_sidebar():
+    st.sidebar.title("Features")
+    st.sidebar.header("Available Options")  # Add a sidebar title
+    # Create radio button group
+    page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])
+
+    names = ["Sai Annapurna", "Kalyan Ram Chegondi", "Vinay Bhaskar Bonam", "Karthik Vasa", "Tusha Rahul Bellamkonda", "Pindi Sushmitha Devi"]
+    st.sidebar.title("Developed By :")
+    for name in names:
+        st.sidebar.write(name)
+    st.sidebar.title("Under The Guidance of :")
+    st.sidebar.write("Dr. Bomma Ramakrishna")
+
+     st.header("Daily Quote:")
     quote, author = get_daily_quote()
       # Define CSS for gradient background
     quote_html = f'''
@@ -38,18 +52,6 @@ def display_quote():
     
     st.components.v1.html(full_html, height=150) # Display the combined quote and author with HTML styling
 
-def custom_sidebar():
-    st.sidebar.title("Features")
-    st.sidebar.header("Available Options")  # Add a sidebar title
-    # Create radio button group
-    page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])
-
-    names = ["Sai Annapurna", "Kalyan Ram Chegondi", "Vinay Bhaskar Bonam", "Karthik Vasa", "Tusha Rahul Bellamkonda", "Pindi Sushmitha Devi"]
-    st.sidebar.title("Developed By :")
-    for name in names:
-        st.sidebar.write(name)
-    st.sidebar.title("Under The Guidance of :")
-    st.sidebar.write("Dr. Bomma Ramakrishna")
     return page_choice
 
 # Use the custom sidebar method
@@ -62,5 +64,3 @@ elif page_choice == "Text Translation":
 elif page_choice == "Text Summarization":
     page3.main()  # Call the main function for Page 3
 
-# Display the daily quote and author
-display_quote()
