@@ -10,7 +10,7 @@ from itertools import cycle
 quotes_df = pd.read_csv('AnimeQuotes.csv')  # Replace 'AnimeQuotes.csv' with your file path
 
 # Colors to rotate for quotes and authors
-quote_colors = cycle(["red", "blue", "green", "purple","orange","White","brown","black")  # Add more colors as needed
+quote_colors = cycle(["red", "blue", "green", "purple","orange","White","brown","black"])  # Add more colors as needed
 author_colors = cycle(["blue", "green", "purple", "red"])  # Corresponding colors for authors
 
 # Function to get the quote and author based on the current hour
