@@ -19,7 +19,7 @@ def get_daily_quote():
 def display_quote():
     st.header("Daily Quote:")
     quote, author = get_daily_quote()
-    quote_html = f'<p style="color:red"><strong>{quote}</strong></p>'
+    quote_html = f'<p style="color:dark red"><strong>{quote}</strong></p>'
     author_html = f'<p style="color:blue"><em>- {author}</em></p>'
     full_html = quote_html + author_html
     st.components.v1.html(full_html, height=150)  # Display the combined quote and author with HTML styling
