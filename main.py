@@ -19,7 +19,7 @@ def get_daily_quote():
 def display_quote():
     st.header("Daily Quote:")
     quote, author = get_daily_quote()
-st.write(f"**{quote}**", unsafe_allow_html=True, unsafe_allow_html=True, unsafe_allow_html=True)  # Change color for the quote
+st.write(f"**{quote}**", unsafe_allow_html=True, unsafe_allow_html=True)  # Change color for the quote
 st.write(f"*- {author}*", unsafe_allow_html=True)  # Change color for the author
 
 def custom_sidebar():
