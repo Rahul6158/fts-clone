@@ -15,9 +15,6 @@ def get_daily_quote():
     quote_index = today.day % len(quotes_df)
     daily_quote = quotes_df.iloc[quote_index]
     return daily_quote['Quote'], daily_quote['Character']  # Assuming 'Quote' and 'Character' are column names
-
-# Function to display the daily quote and author
-def display_quote():
    
 def custom_sidebar():
     st.sidebar.title("Features")
