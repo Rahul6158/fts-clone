@@ -17,7 +17,6 @@ def get_daily_quote():
 
 # Function to display the daily quote and author
 def display_quote():
-    st.header("Daily Quote:")
     quote, author = get_daily_quote()
     
     quote_html = f'<p style="color:red; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
@@ -38,9 +37,9 @@ def custom_sidebar():
         st.sidebar.write(name)
     st.sidebar.title("Under The Guidance of :")
     st.sidebar.write("Dr. Bomma Ramakrishna")
+    st.header("Daily Quote:")
     
     # Display the daily quote and author
-    st.header("Daily Quote:")
     display_quote()
     
     return page_choice
