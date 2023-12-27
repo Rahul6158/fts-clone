@@ -17,7 +17,7 @@ def get_daily_quote():
 
 # Function to display the daily quote and author
 def display_quote():
-    st.title("Daily Quote:")
+    st.header("Daily Quote:")
     quote, author = get_daily_quote()
     st.write(f"\"{quote}\"")
     st.write(f"- {author}")
