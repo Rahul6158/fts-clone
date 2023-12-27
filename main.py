@@ -20,9 +20,19 @@ def get_daily_quote():
 def display_quote():
     st.header("Daily Quote:")
     quote, author = get_daily_quote()
-    quote_html = f'<p style="color:red; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
+    # Define CSS for gradient background
+    quote_html = f'''
+    <div style="
+        background: linear-gradient(45deg, #FF5733, #33FFA8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: Lucida Console, Monaco, monospace;
+        font-size: 20px;
+        ">
+        <strong>{quote}</strong>
+    </div>
+    '''
     author_html = f'<p style="color:blue; font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
-
     full_html = quote_html + author_html
     st.components.v1.html(full_html, height=150)  # Display the combined quote and author with HTML styling
 
