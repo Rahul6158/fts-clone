@@ -6,6 +6,7 @@ import datetime
 import pandas as pd
 from itertools import cycle
 
+st.logo("logo.png")
 # Read the CSV file containing the quotes and authors
 quotes_df = pd.read_csv('AnimeQuotes.csv')  # Replace 'AnimeQuotes.csv' with your file path
 
@@ -45,8 +46,7 @@ def custom_sidebar():
 # Use the custom sidebar method
 page_choice = custom_sidebar()
 
-# Display the logo at the top of the main page
-st.image('logo.png', width=500)  # Replace 'logo.png' with your logo file and adjust the width as needed
+# Display the logo at the top of the main page 
 
 # Display the daily quote and author in the sidebar
 display_quote()
