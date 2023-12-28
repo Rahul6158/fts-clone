@@ -36,12 +36,12 @@ def display_quote():
     st.markdown(full_html, unsafe_allow_html=True)  # Display the combined quote and author
 
 def custom_sidebar():
+        # Display the daily quote and author
+    display_quote()
     st.sidebar.title("Features")
     st.sidebar.header("Available Options")  # Add a sidebar title
     # Create radio button group
     page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])
-    # Display the daily quote and author
-    display_quote()
 
     return page_choice
 
