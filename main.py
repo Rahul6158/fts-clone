@@ -10,20 +10,28 @@ logo = Image.open('logo.png')
 # Read the CSV file containing the quotes and authors
 quotes_df = pd.read_csv('AnimeQuotes.csv')  # Replace 'AnimeQuotes.csv' with your file path
 
+# Predefined list of colors
+quote_color_list = ["red", "blue", "green", "purple", "orange"]  # Add more colors if needed
+author_color_list = ["blue", "green", "purple", "red", "black"]  # Corresponding colors for authors
+
 # Function to get the quote and author based on the current hour
 def get_hourly_quote():
     current_hour = datetime.datetime.now().hour
     quote_index = current_hour % len(quotes_df)
     hourly_quote = quotes_df.iloc[quote_index]
-    return hourly_quote['Quote'], hourly_quote['Character']  # Assuming 'Quote' and 'Character' are column names
+    return hourly_quote['Quote'], hourly_quote['Character'], quote_index  # Assuming 'Quote' and 'Character' are column names
 
-# Function to display the hourly quote and author
+# Function to display the hourly quote and author with rotating colors
 def display_quote():
-    quote, author = get_hourly_quote()
+    quote, author, quote_index = get_hourly_quote()
+    
+    # Get quote and author colors based on the quote index
+    quote_color = quote_color_list[quote_index % len(quote_color_list)]
+    author_color = author_color_list[quote_index % len(author_color_list)]
     
     tp_html = '<p style="color:black; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><br><br><strong>TimePass Quotes : </strong></p>'
-    quote_html = f'<p style="font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
-    author_html = f'<p style="font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
+    quote_html = f'<p style="color:{quote_color}; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
+    author_html = f'<p style="color:{author_color}; font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
     
     full_html = tp_html + quote_html + author_html
     st.sidebar.markdown(full_html, unsafe_allow_html=True)   # Display the combined quote and author in the sidebar
