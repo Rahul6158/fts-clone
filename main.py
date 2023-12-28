@@ -22,7 +22,6 @@ def get_hourly_quote():
 
 # Function to display the hourly quote and author with rotating colors
 def display_quote():
-    st.title("Daily Quote:")
     quote, author = get_hourly_quote()
     
     # Get next color in rotation for the quote and author
@@ -31,13 +30,11 @@ def display_quote():
     
     quote_html = f'<p style="color:{quote_color}; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
     author_html = f'<p style="color:{author_color}; font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
-    full_html = quote_html + author_html
     
-    st.markdown(full_html, unsafe_allow_html=True)  # Display the combined quote and author
+    full_html = quote_html + author_html
+    st.sidebar.markdown(full_html, unsafe_allow_html=True)  # Display the combined quote and author in the sidebar
 
 def custom_sidebar():
-        # Display the daily quote and author
-    display_quote()
     st.sidebar.title("Features")
     st.sidebar.header("Available Options")  # Add a sidebar title
     # Create radio button group
@@ -50,6 +47,9 @@ page_choice = custom_sidebar()
 
 # Display the logo at the top of the main page
 st.image('logo.png', width=500)  # Replace 'logo.png' with your logo file and adjust the width as needed
+
+# Display the daily quote and author in the sidebar
+display_quote()
 
 # Depending on the selected choice, call the respective main function
 if page_choice == "Document and Pdf Translation":
