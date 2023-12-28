@@ -15,7 +15,7 @@ author_colors = cycle(["blue", "green", "purple", "red"])  # Corresponding color
 
 # Function to get the quote and author based on the current hour
 def get_hourly_quote():
-    current_hour = datetime.datetime.now().hour
+    current_hour = datetime.datetime.now().min
     quote_index = current_hour % len(quotes_df)
     hourly_quote = quotes_df.iloc[quote_index]
     return hourly_quote['Quote'], hourly_quote['Character']  # Assuming 'Quote' and 'Character' are column names
@@ -39,7 +39,7 @@ def custom_sidebar():
     st.sidebar.header("Available Options")  # Add a sidebar title
     # Create radio button group
     page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])
-    s.header("Timmepass Quotes : ")
+    st.header("Timepass Quotes : ")
 
     return page_choice
 
