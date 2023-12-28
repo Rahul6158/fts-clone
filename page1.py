@@ -139,7 +139,7 @@ def main():
     st.title("Text Translation and Conversion to Speech ( MultiLingual )")
 
     # Add a file uploader for DOCX, PDF, images
-    uploaded_file = st.file_uploader("Upload a file", type=["docx", "pdf"])
+    uploaded_file = st.file_uploader("Upload a file under 50000 words", type=["docx", "pdf"])
 
     if uploaded_file is not None:
         file_extension = uploaded_file.name.split('.')[-1].lower()
