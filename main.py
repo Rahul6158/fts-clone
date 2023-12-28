@@ -10,7 +10,7 @@ from itertools import cycle
 quotes_df = pd.read_csv('AnimeQuotes.csv')  # Replace 'AnimeQuotes.csv' with your file path
 
 # Colors to rotate for quotes and authors
-quote_colors = cycle(["red", "blue", "green", "purple","orange","White","brown","black"])  # Add more colors as needed
+quote_colors = cycle(["red", "blue", "green", "purple", "orange", "white", "brown", "black"])  # Add more colors as needed
 author_colors = cycle(["blue", "green", "purple", "red"])  # Corresponding colors for authors
 
 # Function to get the quote and author based on the current hour
@@ -40,6 +40,10 @@ def custom_sidebar():
     st.sidebar.header("Available Options")  # Add a sidebar title
     # Create radio button group
     page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])
+    
+    # Display the logo
+    st.image('logo.png', width=200)  # Replace 'your_logo.png' with your logo file and adjust the width as needed
+    
     # Display the hourly quote and author
     display_quote()
     
