@@ -4,6 +4,7 @@ import page2
 import page3
 import datetime
 import pandas as pd
+from PIL import Image
 from itertools import cycle
 
 logo = Image.open('logo.png')
