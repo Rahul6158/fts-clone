@@ -51,6 +51,7 @@ st.image(logo, use_column_width=True)
 # Use the custom sidebar method
 page_choice = custom_sidebar()
 
+print("/n")
 # Display the project description in the sidebar
 project_description = '''
 ### Project Description
