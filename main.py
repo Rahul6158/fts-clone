@@ -17,17 +17,13 @@ def get_hourly_quote():
     hourly_quote = quotes_df.iloc[quote_index]
     return hourly_quote['Quote'], hourly_quote['Character']  # Assuming 'Quote' and 'Character' are column names
 
-# Function to display the hourly quote and author with rotating colors
+# Function to display the hourly quote and author
 def display_quote():
     quote, author = get_hourly_quote()
     
-    # Get next color in rotation for the quote and author
-    quote_color = next(quote_colors)
-    author_color = next(author_colors)
-    
     tp_html = '<p style="color:black; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><br><br><strong>TimePass Quotes : </strong></p>'
-    quote_html = f'<p style="color:{quote_color}; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
-    author_html = f'<p style="color:{author_color}; font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
+    quote_html = f'<p style="font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
+    author_html = f'<p style="font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
     
     full_html = tp_html + quote_html + author_html
     st.sidebar.markdown(full_html, unsafe_allow_html=True)   # Display the combined quote and author in the sidebar
