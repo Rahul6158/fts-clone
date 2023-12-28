@@ -22,7 +22,7 @@ def get_hourly_quote():
 
 # Function to display the hourly quote and author with rotating colors
 def display_quote():
-    st.sidebar.title("Daily Quote:")
+    st.title("Daily Quote:")
     quote, author = get_hourly_quote()
     
     # Get next color in rotation for the quote and author
@@ -33,7 +33,7 @@ def display_quote():
     author_html = f'<p style="color:{author_color}; font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
     full_html = quote_html + author_html
     
-    st.sidebar.markdown(full_html, unsafe_allow_html=True)  # Display the combined quote and author in the sidebar
+    st.markdown(full_html, unsafe_allow_html=True)  # Display the combined quote and author
 
 def custom_sidebar():
     st.sidebar.title("Features")
@@ -41,26 +41,16 @@ def custom_sidebar():
     # Create radio button group
     page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])
     
-    # Display the logo with specified width
-    st.sidebar.markdown('<img src="logo.png" width="500">', unsafe_allow_html=True)  # Replace 'logo.png' with your logo file and adjust the width as needed
-    
-    # Display the hourly quote and author
-    display_quote()
-    
     return page_choice
-
-# Initialize session state to store the last updated hour
-if 'last_updated_hour' not in st.session_state:
-    st.session_state.last_updated_hour = -1
 
 # Use the custom sidebar method
 page_choice = custom_sidebar()
 
-# Check if an hour has passed to update the quote
-current_hour = datetime.datetime.now().min
-if current_hour != st.session_state.last_updated_hour:
-    st.session_state.last_updated_hour = current_hour
-    st.experimental_rerun()  # Rerun the app to update the displayed quote
+# Display the logo at the top of the main page
+st.image('logo.png', width=500)  # Replace 'logo.png' with your logo file and adjust the width as needed
+
+# Display the daily quote and author
+display_quote()
 
 # Depending on the selected choice, call the respective main function
 if page_choice == "Document and Pdf Translation":
