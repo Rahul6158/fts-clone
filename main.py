@@ -71,5 +71,5 @@ elif page_choice == "Text Translation":
 elif page_choice == "Text Summarization":
     page3.main()  # Call the main function for Page 3
     
-elif page_choice == "Null val Remover from dataset":
-    page4.main()  # Call the main function for Page 4
+elif page_choice == "Null val Remover for dataset":
+    null_removal_page() # Call the main function for Page 4
