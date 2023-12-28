@@ -63,7 +63,6 @@ language_mapping = {
     "sq": "Albanian",
     "mk": "Macedonian",
     "hy": "Armenian",
-    "ka": "Georgian",
     "ne": "Nepali",
     "si": "Sinhala",
     "km": "Khmer",
