@@ -6,7 +6,6 @@ import datetime
 import pandas as pd
 from itertools import cycle
 
-st.sidebar.image('logo.png', width=500)  # Replace 'your_logo.png' with your logo file and adjust the width and height as needed
 # Read the CSV file containing the quotes and authors
 quotes_df = pd.read_csv('AnimeQuotes.csv')  # Replace 'AnimeQuotes.csv' with your file path
 
@@ -40,7 +39,11 @@ def custom_sidebar():
     st.sidebar.title("Features")
     st.sidebar.header("Available Options")  # Add a sidebar title
     # Create radio button group
-    page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])    
+    page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])
+    
+    # Display the logo with specified width
+    st.sidebar.markdown('<img src="logo.png" width="500">', unsafe_allow_html=True)  # Replace 'logo.png' with your logo file and adjust the width as needed
+    
     # Display the hourly quote and author
     display_quote()
     
@@ -54,7 +57,7 @@ if 'last_updated_hour' not in st.session_state:
 page_choice = custom_sidebar()
 
 # Check if an hour has passed to update the quote
-current_hour = datetime.datetime.now().hour
+current_hour = datetime.datetime.now().min
 if current_hour != st.session_state.last_updated_hour:
     st.session_state.last_updated_hour = current_hour
     st.experimental_rerun()  # Rerun the app to update the displayed quote
