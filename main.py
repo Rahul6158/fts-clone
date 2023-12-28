@@ -10,10 +10,6 @@ logo = Image.open('logo.png')
 # Read the CSV file containing the quotes and authors
 quotes_df = pd.read_csv('AnimeQuotes.csv')  # Replace 'AnimeQuotes.csv' with your file path
 
-# Colors to rotate for quotes and authors
-quote_colors = cycle(["red", "blue", "green", "purple", "orange", "white", "brown", "black"])  # Add more colors as needed
-author_colors = cycle(["blue", "green", "purple", "red"])  # Corresponding colors for authors
-
 # Function to get the quote and author based on the current hour
 def get_hourly_quote():
     current_hour = datetime.datetime.now().hour
