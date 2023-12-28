@@ -29,7 +29,7 @@ def display_quote():
     # Get next color in rotation for the quote and author
     quote_color = next(quote_colors)
     author_color = next(author_colors)
-    
+    tp_html = f'<p style="color:black; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>TimePass Quotes : </strong></p>'
     quote_html = f'<p style="color:{quote_color}; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
     author_html = f'<p style="color:{author_color}; font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
     
@@ -41,7 +41,7 @@ def custom_sidebar():
     st.sidebar.header("Available Options")  # Add a sidebar title
     # Create radio button group
     page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])
-    st.write ("Timepass Quotes : ")
+    
     return page_choice
 
 # Display the logo at the top of the main page 
