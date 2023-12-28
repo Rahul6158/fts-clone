@@ -29,7 +29,7 @@ def display_quote():
     # Get next color in rotation for the quote and author
     quote_color = next(quote_colors)
     author_color = next(author_colors)
-    
+    st.header ("Timepass Quotes : ")
     quote_html = f'<p style="color:{quote_color}; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
     author_html = f'<p style="color:{author_color}; font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
     
