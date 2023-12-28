@@ -18,13 +18,8 @@ quote_color_list = [
     "Orange", "Pink", "Purple",
     "Brown", "Indigo", "Teal"
 ]
-author_color_list =  [
-    "Red", "Green", "Blue",
-    "Cyan", "Magenta", "Yellow",
-    "Black", "White", "Gray",
-    "Orange", "Pink", "Purple",
-    "Brown", "Indigo", "Teal"
-] # Corresponding colors for authors
+author_color_list = ['Teal', 'Indigo', 'Brown', 'Purple', 'Pink', 'Orange', 'Gray', 'White', 'Black', 'Yellow', 'Magenta', 'Cyan', 'Blue', 'Green', 'Red']
+ # Corresponding colors for authors
 
 # Function to get the quote and author based on the current hour
 def get_hourly_quote():
