@@ -65,6 +65,7 @@ def generate_summary(text, num_sentences=6):
     return " ".join(top_sentences)
 
 def main():
+    st.image("jangirii.png", width=300)
     st.title("Text Summarization")
 
     text = st.text_area("Enter your text here:", height=400)
