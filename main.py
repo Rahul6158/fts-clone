@@ -41,7 +41,7 @@ def custom_sidebar():
     st.sidebar.title("Features")
     st.sidebar.header("Available Options")  # Add a sidebar title
     # Create radio button group
-    page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])
+    page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization","Null val Remover for dataset"])
     
     return page_choice
 
@@ -70,3 +70,6 @@ elif page_choice == "Text Translation":
     page2.main()
 elif page_choice == "Text Summarization":
     page3.main()  # Call the main function for Page 3
+    
+elif page_choice == "Null val Remover from dataset":
+    page4.main()  # Call the main function for Page 4
