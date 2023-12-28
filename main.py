@@ -4,10 +4,15 @@ import page2
 import page3
 import datetime
 import pandas as pd
+from itertools import cycle
 import time
 
 # Read the CSV file containing the quotes and authors
 quotes_df = pd.read_csv('AnimeQuotes.csv')  # Replace 'AnimeQuotes.csv' with your file path
+
+# Colors to rotate for quotes and authors
+quote_colors = cycle(["red", "blue", "green", "purple", "orange", "white", "brown", "black"])  # Add more colors as needed
+author_colors = cycle(["blue", "green", "purple", "red"])  # Corresponding colors for authors
 
 # Function to get the quote and author based on the current time
 def get_quote():
@@ -16,13 +21,16 @@ def get_quote():
     hourly_quote = quotes_df.iloc[quote_index]
     return hourly_quote['Quote'], hourly_quote['Character']  # Assuming 'Quote' and 'Character' are column names
 
-# Function to display the quote and author
+# Function to display the quote and author with rotating colors
 def display_quote():
     quote, author = get_quote()
     
-    quote_html = f'<h3 style="color:black; font-family: Lucida Console, Monaco, monospace;">Timepass Quotes:</h3>'
-    quote_html += f'<p style="font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
-    author_html = f'<p style="font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
+    # Get next color in rotation for the quote and author
+    quote_color = next(quote_colors)
+    author_color = next(author_colors)
+    
+    quote_html = f'<p style="color:{quote_color}; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
+    author_html = f'<p style="color:{author_color}; font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
     
     full_html = quote_html + author_html
     st.sidebar.markdown(full_html, unsafe_allow_html=True)  # Display the combined quote and author in the sidebar
@@ -39,7 +47,7 @@ def custom_sidebar():
 page_choice = custom_sidebar()
 
 # Display the logo at the top of the main page
-st.image('logo.png', width=700)  # Replace 'logo.png' with your logo file and adjust the width as needed
+st.image('logo.png', width=500)  # Replace 'logo.png' with your logo file and adjust the width as needed
 
 # Loop to update the quote every minute
 while True:
