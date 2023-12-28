@@ -62,7 +62,6 @@ language_mapping = {
     "ga": "Irish",
     "sq": "Albanian",
     "mk": "Macedonian",
-    "hy": "Armenian",
     "ne": "Nepali",
     "si": "Sinhala",
     "km": "Khmer",
