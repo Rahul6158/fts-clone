@@ -40,7 +40,9 @@ def custom_sidebar():
     st.sidebar.header("Available Options")  # Add a sidebar title
     # Create radio button group
     page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])
-    
+    # Display the daily quote and author
+    display_quote()
+
     return page_choice
 
 # Use the custom sidebar method
@@ -48,9 +50,6 @@ page_choice = custom_sidebar()
 
 # Display the logo at the top of the main page
 st.image('logo.png', width=500)  # Replace 'logo.png' with your logo file and adjust the width as needed
-
-# Display the daily quote and author
-display_quote()
 
 # Depending on the selected choice, call the respective main function
 if page_choice == "Document and Pdf Translation":
