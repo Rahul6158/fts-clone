@@ -42,7 +42,7 @@ def custom_sidebar():
     page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])
     
     # Display the logo
-    st.sidebar.image('logo.png', width=500, height=400)  # Replace 'your_logo.png' with your logo file and adjust the width and height as needed
+    st.sidebar.image('logo.png', width=500)  # Replace 'your_logo.png' with your logo file and adjust the width and height as needed
     
     # Display the hourly quote and author
     display_quote()
