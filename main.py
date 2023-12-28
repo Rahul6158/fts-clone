@@ -51,15 +51,16 @@ st.image(logo, use_column_width=True)
 # Use the custom sidebar method
 page_choice = custom_sidebar()
 
-# Display the daily quote and author in the sidebar
-display_quote()
-
 # Display the project description in the sidebar
 project_description = '''
 ### Project Description
 The Streamlit app is a language magician, effortlessly translating your text into a variety of languages using Google Translate. Not stopping there, it converts your translated text into spoken words, offering an audio player and download options. It's a one-stop-shop with an elegant interface featuring an image, a word count display, and a language selector, making language translation and speech synthesis a seamless experience. This handy tool ensures you can listen and download your translated speech in a snap, catering to different operating systems with ease.
 '''
 st.sidebar.markdown(project_description, unsafe_allow_html=True)
+
+# Display the daily quote and author in the sidebar
+display_quote()
+
 
 
 # Depending on the selected choice, call the respective main function
