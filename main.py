@@ -29,12 +29,13 @@ def display_quote():
     # Get next color in rotation for the quote and author
     quote_color = next(quote_colors)
     author_color = next(author_colors)
-    tp_html = f'<p style="color:black; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>TimePass Quotes : </strong></p>'
+    
+    tp_html = '<p style="color:black; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>TimePass Quotes : </strong></p>'
     quote_html = f'<p style="color:{quote_color}; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
     author_html = f'<p style="color:{author_color}; font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
     
-    full_html = quote_html + author_html
-    st.sidebar.markdown(full_html, unsafe_allow_html=True)  # Display the combined quote and author in the sidebar
+    full_html = tp_html + quote_html + author_html
+    st.sidebar.markdown(full_html, unsafe_allow_html=True)   # Display the combined quote and author in the sidebar
 
 def custom_sidebar():
     st.sidebar.title("Features")
