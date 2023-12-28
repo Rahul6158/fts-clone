@@ -11,8 +11,20 @@ logo = Image.open('logo.png')
 quotes_df = pd.read_csv('AnimeQuotes.csv')  # Replace 'AnimeQuotes.csv' with your file path
 
 # Predefined list of colors
-quote_color_list = ["red", "blue", "green", "purple", "orange"]  # Add more colors if needed
-author_color_list = ["blue", "green", "purple", "red", "black"]  # Corresponding colors for authors
+quote_color_list = [
+    "Red", "Green", "Blue",
+    "Cyan", "Magenta", "Yellow",
+    "Black", "White", "Gray",
+    "Orange", "Pink", "Purple",
+    "Brown", "Indigo", "Teal"
+]
+author_color_list =  [
+    "Red", "Green", "Blue",
+    "Cyan", "Magenta", "Yellow",
+    "Black", "White", "Gray",
+    "Orange", "Pink", "Purple",
+    "Brown", "Indigo", "Teal"
+] # Corresponding colors for authors
 
 # Function to get the quote and author based on the current hour
 def get_hourly_quote():
