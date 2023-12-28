@@ -46,9 +46,10 @@ def custom_sidebar():
 page_choice = custom_sidebar()
 
 # Display the logo at the top of the main page
-st.image('logo.png', width=500)  # Replace 'logo.png' with your logo file and adjust the width as needed
+st.image('logo.png', width=700)  # Replace 'logo.png' with your logo file and adjust the width as needed
 
 # Display the daily quote and author in the sidebar
+st.header("Timepass Quotes : ")
 display_quote()
 
 # Depending on the selected choice, call the respective main function
