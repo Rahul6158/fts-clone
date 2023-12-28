@@ -22,7 +22,12 @@ language_mapping = {
     "kn": "Kannada",
     "mr": "Marathi",
     "bn": "Bengali",
+    "hi": "Hindi",
+    "ur": "Urdu",
+    "ar": "Arabic",
+    "zh": "Chinese"
 }
+
 
 # Function to extract text from a DOCX file
 def process_docx_text(docx_file, skip_lists=True):
@@ -130,7 +135,7 @@ def count_words(text):
     return len(words)
 
 def main():
-    st.image("jangirii.png", width=300)
+    st.image("jangirii.png", width=100)
     st.title("Text Translation and Conversion to Speech ( MultiLingual )")
 
     # Add a file uploader for DOCX, PDF, images
