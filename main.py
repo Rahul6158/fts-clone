@@ -5,7 +5,6 @@ import page3
 import datetime
 import pandas as pd
 from itertools import cycle
-import time
 
 # Read the CSV file containing the quotes and authors
 quotes_df = pd.read_csv('AnimeQuotes.csv')  # Replace 'AnimeQuotes.csv' with your file path
@@ -14,16 +13,17 @@ quotes_df = pd.read_csv('AnimeQuotes.csv')  # Replace 'AnimeQuotes.csv' with you
 quote_colors = cycle(["red", "blue", "green", "purple", "orange", "white", "brown", "black"])  # Add more colors as needed
 author_colors = cycle(["blue", "green", "purple", "red"])  # Corresponding colors for authors
 
-# Function to get the quote and author based on the current time
-def get_quote():
-    current_time = datetime.datetime.now().strftime('%H:%M')
-    quote_index = hash(current_time) % len(quotes_df)
+# Function to get the quote and author based on the current hour
+def get_hourly_quote():
+    current_hour = datetime.datetime.now().hour
+    quote_index = current_hour % len(quotes_df)
     hourly_quote = quotes_df.iloc[quote_index]
     return hourly_quote['Quote'], hourly_quote['Character']  # Assuming 'Quote' and 'Character' are column names
 
-# Function to display the quote and author with rotating colors
+# Function to display the hourly quote and author with rotating colors
 def display_quote():
-    quote, author = get_quote()
+    st.title("Daily Quote:")
+    quote, author = get_hourly_quote()
     
     # Get next color in rotation for the quote and author
     quote_color = next(quote_colors)
@@ -31,16 +31,16 @@ def display_quote():
     
     quote_html = f'<p style="color:{quote_color}; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
     author_html = f'<p style="color:{author_color}; font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
-    
     full_html = quote_html + author_html
-    st.sidebar.markdown(full_html, unsafe_allow_html=True)  # Display the combined quote and author in the sidebar
+    
+    st.markdown(full_html, unsafe_allow_html=True)  # Display the combined quote and author
 
 def custom_sidebar():
     st.sidebar.title("Features")
     st.sidebar.header("Available Options")  # Add a sidebar title
     # Create radio button group
     page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])
-
+    
     return page_choice
 
 # Use the custom sidebar method
@@ -49,10 +49,8 @@ page_choice = custom_sidebar()
 # Display the logo at the top of the main page
 st.image('logo.png', width=500)  # Replace 'logo.png' with your logo file and adjust the width as needed
 
-# Loop to update the quote every minute
-while True:
-    display_quote()
-    time.sleep(60)  # Update the quote every minute
+# Display the daily quote and author
+display_quote()
 
 # Depending on the selected choice, call the respective main function
 if page_choice == "Document and Pdf Translation":
