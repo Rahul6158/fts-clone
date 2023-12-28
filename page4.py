@@ -105,6 +105,7 @@ multilingual, and vibrant app—your go-to for seamless translation and speech c
     st.markdown(project_description, unsafe_allow_html=True)
     ''' --- '''
     st.header("How to Use :")
+    ''' --- '''
     project_description1 = '''
     ---
     
