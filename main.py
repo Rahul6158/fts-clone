@@ -39,6 +39,7 @@ def custom_sidebar():
     st.sidebar.header("Available Options")  # Add a sidebar title
     # Create radio button group
     page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])
+    s.header("Timmepass Quotes : ")
 
     return page_choice
 
@@ -49,7 +50,6 @@ page_choice = custom_sidebar()
 st.image('logo.png', width=700)  # Replace 'logo.png' with your logo file and adjust the width as needed
 
 # Display the daily quote and author in the sidebar
-st.header("Timepass Quotes : ")
 display_quote()
 
 # Depending on the selected choice, call the respective main function
