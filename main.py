@@ -29,7 +29,7 @@ def display_quote():
     quote_color = next(quote_colors)
     author_color = next(author_colors)
     
-    quote_html = f'<h3 style="color:{quote_color}; font-family: Lucida Console, Monaco, monospace;">Timepass Quotes:</h3>'
+    quote_html = f'<h3 style="color:black; font-family: Lucida Console, Monaco, monospace;">Timepass Quotes:</h3>'
     quote_html += f'<p style="color:{quote_color}; font-family: Lucida Console, Monaco, monospace; font-size: 20px;"><strong>{quote}</strong></p>'
     author_html = f'<p style="color:{author_color}; font-family: Lucida Console, Monaco, monospace; font-size: 16px;"><em>- {author}</em></p>'
     
