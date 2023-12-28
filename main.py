@@ -44,10 +44,11 @@ def custom_sidebar():
 
     return page_choice
 
+# Display the logo at the top of the main page 
+st.image(logo, use_column_width=True)
+
 # Use the custom sidebar method
 page_choice = custom_sidebar()
-
-# Display the logo at the top of the main page 
 
 # Display the daily quote and author in the sidebar
 display_quote()
