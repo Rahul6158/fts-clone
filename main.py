@@ -6,6 +6,7 @@ import datetime
 import pandas as pd
 from itertools import cycle
 
+st.sidebar.image('logo.png', width=500)  # Replace 'your_logo.png' with your logo file and adjust the width and height as needed
 # Read the CSV file containing the quotes and authors
 quotes_df = pd.read_csv('AnimeQuotes.csv')  # Replace 'AnimeQuotes.csv' with your file path
 
@@ -39,11 +40,7 @@ def custom_sidebar():
     st.sidebar.title("Features")
     st.sidebar.header("Available Options")  # Add a sidebar title
     # Create radio button group
-    page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])
-    
-    # Display the logo
-st.sidebar.image('logo.png', width=500)  # Replace 'your_logo.png' with your logo file and adjust the width and height as needed
-    
+    page_choice = st.sidebar.radio("", ["Document and Pdf Translation", "Text Translation", "Text Summarization"])    
     # Display the hourly quote and author
     display_quote()
     
