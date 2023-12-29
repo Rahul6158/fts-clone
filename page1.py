@@ -15,6 +15,8 @@ from PIL import Image
 
 
 language_mapping = {
+    "ml" : "Malayalam",
+    "or" : "Odia",
     "en": "English",
     "hi": "Hindi",
     "gu": "Gujarati",
