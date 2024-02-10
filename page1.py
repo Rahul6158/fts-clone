@@ -69,7 +69,7 @@ def process_pdf_text_without_lists(pdf_file):
     return pdf_text
 
 # Function to translate text using Google Translate
-def translate_text_with_google(text, target_language, progress_bar):
+def translate_text_with_google(text, target_language, progress_bar=None):
     google_translator = GoogleTranslator()
 
     max_chunk_length = 500
@@ -80,8 +80,9 @@ def translate_text_with_google(text, target_language, progress_bar):
         translated_chunk = google_translator.translate(chunk, dest=target_language).text
         translated_text += translated_chunk
         
-        # Update progress bar (ensure progress doesn't exceed 100%)
-        progress_bar.progress(min((i + max_chunk_length) / len(text), 1.0))
+        # Update progress bar if provided
+        if progress_bar:
+            progress_bar.progress(min((i + max_chunk_length) / len(text), 1.0))
 
     return translated_text
 
@@ -111,7 +112,7 @@ def convert_text_to_word_doc(text, output_file):
     doc.save(output_file)
 
 # Function to translate text with fallback to Google Translate on error
-def translate_text_with_fallback(text, target_language, progress_bar):
+def translate_text_with_fallback(text, target_language, progress_bar=None):
     try:
         return translate_text_with_google(text, target_language, progress_bar)
     except Exception as e:
