@@ -9,6 +9,7 @@ from docx import Document
 from PIL import Image
 import pytesseract
 import PyPDF2
+import time
 
 language_mapping = {
     "en": "English",
@@ -68,8 +69,14 @@ def process_pdf_text_without_lists(pdf_file):
         st.error(f"Error processing PDF: {str(e)}")
     return pdf_text
 
+# Function to extract text from a TXT file
+def process_txt_file(txt_file):
+    txt_text = txt_file.read()
+    text = txt_text.decode('utf-8')
+    return text
+
 # Function to translate text using Google Translate
-def translate_text_with_google(text, target_language, progress_bar=None):
+def translate_text_with_google(text, target_language):
     google_translator = GoogleTranslator()
 
     max_chunk_length = 500
@@ -79,10 +86,6 @@ def translate_text_with_google(text, target_language, progress_bar=None):
         chunk = text[i:i + max_chunk_length]
         translated_chunk = google_translator.translate(chunk, dest=target_language).text
         translated_text += translated_chunk
-        
-        # Update progress bar if provided
-        if progress_bar:
-            progress_bar.progress(min((i + max_chunk_length) / len(text), 1.0))
 
     return translated_text
 
@@ -112,12 +115,11 @@ def convert_text_to_word_doc(text, output_file):
     doc.save(output_file)
 
 # Function to translate text with fallback to Google Translate on error
-def translate_text_with_fallback(text, target_language, progress_bar=None):
+def translate_text_with_fallback(text, target_language):
     try:
-        return translate_text_with_google(text, target_language, progress_bar)
+        return translate_text_with_google(text, target_language)
     except Exception as e:
         st.warning(f"Google Translate error: {str(e)}")
-        return None
 
 # Function to count words in the text
 def count_words(text):
@@ -181,47 +183,47 @@ def main():
                 # Check if edited_text is not empty or None before attempting translation
                 if edited_text and len(edited_text.strip()) > 0:
                     # Translate the edited text
-                    progress_bar = st.progress(0)
-                    translated_text = translate_text_with_fallback(edited_text, target_language, progress_bar)
-                    progress_bar.empty()  # Clear the progress bar after translation
+                    start_time = time.time()
+                    translated_text = translate_text_with_fallback(edited_text, target_language)
+                    end_time = time.time()
+                    translation_time = end_time - start_time
+                    
+                    if translated_text:
+                        st.subheader(f"Translated text ({target_language}):")
+                        st.write(translated_text)
+                        st.write(f"Translation Time: {int(translation_time)} seconds")
+
+                        # Get the target language code from language_mapping
+                        target_language_code = [code for code, lang in language_mapping.items() if lang == target_language][0]
+
+                        # Translate text using Google Translate
+                        try:
+                            translated_text = translate_text_with_google(translated_text, target_language_code)
+                        except Exception as e:
+                            st.error(f"Google Translate error: {str(e)}")
+                            return
+
+                        # Convert translated text to speech
+                        output_file = "translated_speech.mp3"
+                        convert_text_to_speech(translated_text, output_file, language=target_language_code)
+
+                        # Play the generated speech
+                        audio_file = open(output_file, 'rb')
+                        st.audio(audio_file.read(), format='audio/mp3')
+
+                        # Provide a download link for the MP3 file
+                        st.markdown(get_binary_file_downloader_html("Download Audio File", output_file, 'audio/mp3'), unsafe_allow_html=True)
+
+                        # Convert the translated text to a Word document
+                        word_output_file = "translated_text.docx"
+                        convert_text_to_word_doc(translated_text, word_output_file)
+
+                        # Provide a download link for the Word document
+                        st.markdown(get_binary_file_downloader_html("Download Word Document", word_output_file, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'), unsafe_allow_html=True)
+                    else:
+                        st.warning("Translation result is empty. Please check your input text.")
                 else:
                     st.warning("Input text is empty. Please check your document.")
-
-                # Display translated text
-                if translated_text:
-                    st.subheader(f"Translated text ({target_language}):")
-                    st.write(translated_text)
-                else:
-                    st.warning("Translation result is empty. Please check your input text.")
-
-                if translated_text:
-                    # Get the target language code from language_mapping
-                    target_language_code = [code for code, lang in language_mapping.items() if lang == target_language][0]
-
-                    # Translate text using Google Translate
-                    try:
-                        translated_text = translate_text_with_google(translated_text, target_language_code)
-                    except Exception as e:
-                        st.error(f"Google Translate error: {str(e)}")
-                        return
-
-                    # Convert translated text to speech
-                    output_file = "translated_speech.mp3"
-                    convert_text_to_speech(translated_text, output_file, language=target_language_code)
-
-                    # Play the generated speech
-                    audio_file = open(output_file, 'rb')
-                    st.audio(audio_file.read(), format='audio/mp3')
-
-                    # Provide a download link for the MP3 file
-                    st.markdown(get_binary_file_downloader_html("Download Audio File", output_file, 'audio/mp3'), unsafe_allow_html=True)
-
-                    # Convert the translated text to a Word document
-                    word_output_file = "translated_text.docx"
-                    convert_text_to_word_doc(translated_text, word_output_file)
-
-                    # Provide a download link for the Word document
-                    st.markdown(get_binary_file_downloader_html("Download Word Document", word_output_file, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'), unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
