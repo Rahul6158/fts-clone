@@ -6,63 +6,18 @@ from googletrans import Translator as GoogleTranslator
 from gtts import gTTS
 import io
 from docx import Document
-from bs4 import BeautifulSoup
 from PIL import Image
 import pytesseract
-import easyocr
 import PyPDF2
-from PIL import Image
-
 
 language_mapping = {
-    "ml" : "Malayalam",
-    "or" : "Odia",
     "en": "English",
-    "hi": "Hindi",
     "gu": "Gujarati",
-    "mr": "Marathi",
     "ta": "Tamil",
     "te": "Telugu",
-    "ur": "Urdu",
+    "kn": "Kannada",
+    "mr": "Marathi",
     "bn": "Bengali",
-    "es": "Spanish",
-    "fr": "French",
-    "de": "German",
-    "it": "Italian",
-    "pt": "Portuguese",
-    "nl": "Dutch",
-    "ja": "Japanese",
-    "ko": "Korean",
-    "ru": "Russian",
-    "ar": "Arabic",
-    "th": "Thai",
-    "tr": "Turkish",
-    "pl": "Polish",
-    "cs": "Czech",
-    "sv": "Swedish",
-    "da": "Danish",
-    "fi": "Finnish",
-    "el": "Greek",
-    "hu": "Hungarian",
-    "uk": "Ukrainian",
-    "no": "Norwegian",
-    "id": "Indonesian",
-    "vi": "Vietnamese",
-    "ro": "Romanian",
-    "iw": "Hebrew",
-    "bg": "Bulgarian",
-    "ca": "Catalan",
-    "hr": "Croatian",
-    "sr": "Serbian",
-    "sk": "Slovak",
-    "lv": "Latvian",
-    "et": "Estonian",
-    "is": "Icelandic",
-    "sq": "Albanian",
-    "ne": "Nepali",
-    "si": "Sinhala",
-    "km": "Khmer",
-    "jw": "Javanese"
 }
 
 # Function to extract text from a DOCX file
@@ -113,14 +68,8 @@ def process_pdf_text_without_lists(pdf_file):
         st.error(f"Error processing PDF: {str(e)}")
     return pdf_text
 
-# Function to extract text from a TXT file
-def process_txt_file(txt_file):
-    txt_text = txt_file.read()
-    text = txt_text.decode('utf-8')
-    return text
-
 # Function to translate text using Google Translate
-def translate_text_with_google(text, target_language):
+def translate_text_with_google(text, target_language, progress_bar):
     google_translator = GoogleTranslator()
 
     max_chunk_length = 500
@@ -130,6 +79,11 @@ def translate_text_with_google(text, target_language):
         chunk = text[i:i + max_chunk_length]
         translated_chunk = google_translator.translate(chunk, dest=target_language).text
         translated_text += translated_chunk
+        
+        # Update progress bar
+        progress_bar.progress((i + max_chunk_length) / len(text))
+        if (i + max_chunk_length) >= len(text):  # Ensure progress doesn't exceed 100%
+            progress_bar.progress(1.0)
 
     return translated_text
 
@@ -159,11 +113,12 @@ def convert_text_to_word_doc(text, output_file):
     doc.save(output_file)
 
 # Function to translate text with fallback to Google Translate on error
-def translate_text_with_fallback(text, target_language):
+def translate_text_with_fallback(text, target_language, progress_bar):
     try:
-        return translate_text_with_google(text, target_language)
+        return translate_text_with_google(text, target_language, progress_bar)
     except Exception as e:
         st.warning(f"Google Translate error: {str(e)}")
+        return None
 
 # Function to count words in the text
 def count_words(text):
@@ -175,7 +130,7 @@ def main():
     st.title("Text Translation and Conversion to Speech ( MultiLingual )")
 
     # Add a file uploader for DOCX, PDF, images
-    uploaded_file = st.file_uploader("Upload a file under 50000 words", type=["docx", "pdf"])
+    uploaded_file = st.file_uploader("Upload a file", type=["docx", "pdf", "jpg", "jpeg", "png", "txt"])
 
     if uploaded_file is not None:
         file_extension = uploaded_file.name.split('.')[-1].lower()
@@ -223,15 +178,19 @@ def main():
             target_language = st.selectbox("Select target language:", list(language_mapping.values()))
 
             # Button to translate and generate audio and download links
-            if st.button("Translate and Generate Audio/Video Download Links"):
+            if st.button("Translate and Generate Audio/Download Links"):
                 # Check if edited_text is not empty or None before attempting translation
                 if edited_text and len(edited_text.strip()) > 0:
                     # Translate the edited text
                     try:
-                        translated_text = translate_text_with_fallback(edited_text, target_language)
+                        # Add a progress bar
+                        progress_bar = st.progress(0)
+                        translated_text = translate_text_with_fallback(edited_text, target_language, progress_bar)
                     except Exception as e:
                         st.error(f"Translation error: {str(e)}")
                         translated_text = None
+                    finally:
+                        progress_bar.empty()  # Clear the progress bar after translation
                 else:
                     st.warning("Input text is empty. Please check your document.")
 
@@ -247,7 +206,7 @@ def main():
 
                 # Translate text using Google Translate
                 try:
-                    translated_text = translate_text_with_google(translated_text, target_language_code)
+                    translated_text = translate_text_with_google(translated_text, target_language_code, progress_bar)
                 except Exception as e:
                     st.error(f"Google Translate error: {str(e)}")
                     return
